@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.15",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +19,19 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "6.4.0",
+    "@typescript-eslint/parser": "6.4.0",
+    "eslint": "8.2.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "prettier": "2.7.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -25,8 +41,109 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "prettier",
+      "airbnb",
+      "airbnb-typescript",
+      "airbnb/hooks"
+    ],
+    "ignorePatterns": [
+      "**/src/app/braApi/generated/*.ts"
+    ],
+    "globals": {
+      "__webpack_init_sharing__": "readonly",
+      "__webpack_share_scopes__": "readonly"
+    },
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "no-confusing-arrow": "off",
+      "@typescript-eslint/consistent-type-assertions": "error",
+      "@typescript-eslint/prefer-ts-expect-error": "error",
+      "linebreak-style": "off",
+      "indent": "off",
+      "@typescript-eslint/indent": "off",
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "react/jsx-indent": "off",
+      "max-len": "off",
+      "object-curly-newline": "off",
+      "operator-linebreak": "off",
+      "react/prop-types": "off",
+      "react/require-default-props": "off",
+      "react/jsx-indent-props": "off",
+      "react/jsx-curly-brace-presence": "off",
+      "function-paren-newline": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "comma-dangle": "off",
+      "implicit-arrow-linebreak": "off",
+      "no-underscore-dangle": "off",
+      "react/function-component-definition": [
+        1,
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+      ],
+      "import/no-restricted-paths": [
+        "error",
+        {
+          "zones": [
+            {
+              "target": "./src/components/axa/**/*",
+              "from": "./src/components/!(axa)/**/*"
+            },
+            {
+              "target": "./src/components/axa/**/*",
+              "from": "./src/!(components)/**/*"
+            },
+            {
+              "target": "./src/components/common/**/*",
+              "from": "./src/components/(views|App)/**/*"
+            },
+            {
+              "target": "./src/components/utils/**/*",
+              "from": "./src/components/(views|App|common)/**/*"
+            },
+            {
+              "target": "./src/utils/**/*",
+              "from": "./src/components/utils/**/*"
+            },
+            {
+              "target": "./src/components/views/**/*",
+              "from": "./src/components/App/**/*"
+            },
+            {
+              "target": "./src/utils/**/*",
+              "from": "./src/components/(views|App)/**/*"
+            },
+            {
+              "target": "./src/slices/**/*",
+              "from": "./src/components/**/*"
+            }
+          ]
+        }
+      ],
+      "react/jsx-wrap-multilines": "off",
+      "react/jsx-curly-newline": "off",
+      "react/no-unstable-nested-components": "off",
+      "no-param-reassign": "off",
+      "@typescript-eslint/quotes": "off",
+      "@typescript-eslint/comma-dangle": "off"
+    }
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 120,
+    "endOfLine": "auto"
   },
   "browserslist": {
     "production": [
