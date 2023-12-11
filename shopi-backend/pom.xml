@@ -128,6 +128,45 @@
                     <password>shopi123</password>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>${jooq.version}</version>
+
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <jdbc>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>jdbc:postgresql://localhost:8081/shopi</url>
+                        <user>myuser</user>
+                        <password>shopi123</password>
+                    </jdbc>
+                    <generator>
+                        <name>org.jooq.codegen.DefaultGenerator</name>
+                        <database>
+                            <includes>.*</includes>
+                            <excludes>
+                                FLYWAY.*
+                            </excludes>
+                        </database>
+<!--                        <target>-->
+<!--                            <packageName>ch.bbw.shopibackend.generated.jooq</packageName>-->
+<!--                            <directory>target/generated-sources/jooq</directory>-->
+<!--                        </target>-->
+                    </generator>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 
