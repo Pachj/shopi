@@ -1,9 +1,11 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'postgres:15'
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_DB=shopi'
+      - 'POSTGRES_PASSWORD=shopi123'
       - 'POSTGRES_USER=myuser'
     ports:
-      - '5432'
+      - '8081:5432'
+    expose:
+      - '8081'
