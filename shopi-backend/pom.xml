@@ -158,14 +158,9 @@
                                 FLYWAY.*
                             </excludes>
                         </database>
-<!--                        <target>-->
-<!--                            <packageName>ch.bbw.shopibackend.generated.jooq</packageName>-->
-<!--                            <directory>target/generated-sources/jooq</directory>-->
-<!--                        </target>-->
                     </generator>
                 </configuration>
             </plugin>
-
 
         </plugins>
     </build>
