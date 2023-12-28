@@ -11,5 +11,5 @@ data class SimpleProduct(
 
 data class Product(
     val simpleProduct: SimpleProduct,
-    val specification: ArrayList<String>,
+    val specification: List<Pair<String, String>>,
 )
