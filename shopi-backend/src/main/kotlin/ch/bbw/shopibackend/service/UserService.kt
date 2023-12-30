@@ -11,12 +11,12 @@ class UserService(
 ) {
 
     fun createUser(user: ShopiUser): ShopiUser {
-        hash(user.password)
+        user.password!!.salt()
         return userRepository.create(user)
     }
 
-    private fun hash(password: String): String {
+    private fun String.salt(): String {
         val encoder = BCryptPasswordEncoder(16)
-        return encoder.encode(password)
+        return encoder.encode(this)
     }
 }

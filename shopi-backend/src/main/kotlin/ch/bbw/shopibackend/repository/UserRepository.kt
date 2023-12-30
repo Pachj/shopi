@@ -26,7 +26,6 @@ class UserRepository(
         return context.select(
             SHOPIUSER.ID.`as`("id"),
             SHOPIUSER.EMAIL.`as`("email"),
-            SHOPIUSER.ID.`as`("password"),
         )
             .from(SHOPIUSER)
             .where(SHOPIUSER.EMAIL.eq(email))

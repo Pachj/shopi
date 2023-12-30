@@ -1,7 +1,7 @@
 package ch.bbw.shopibackend
 
 data class ShopiUser(
-    var id: Int?,
+    var id: Int? = null,
     val email: String,
-    val password: String,
+    var password: String? = null,
 )
