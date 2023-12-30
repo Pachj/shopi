@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserRepository(
-    var context: DSLContext
+    private val context: DSLContext
 ) {
 
     fun create(user: ShopiUser): ShopiUser {

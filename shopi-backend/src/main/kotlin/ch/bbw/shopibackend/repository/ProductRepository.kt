@@ -7,12 +7,11 @@ import ch.bbw.shopibackend.generated.jooq.public_.tables.Specification.SPECIFICA
 import org.jooq.DSLContext
 import org.jooq.Record
 import org.jooq.impl.DSL
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
 @Repository
 class ProductRepository(
-    @Autowired var context: DSLContext
+    private val context: DSLContext
 ) {
 
     fun getAll(): MutableList<SimpleProduct> {
