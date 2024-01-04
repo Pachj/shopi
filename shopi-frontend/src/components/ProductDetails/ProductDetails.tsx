@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
 import style from "../SimpleProduct/SimpleProduct.module.css";
 import React, { useEffect, useState } from "react";
-import { Product } from "../../ProductOverview";
+import { Product } from "../ProductOverview/ProductOverview";
 import ProductSpecifications from "./ProductSpecifications";
 
 const boxStyle = {

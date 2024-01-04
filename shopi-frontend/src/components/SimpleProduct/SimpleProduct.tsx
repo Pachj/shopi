@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent } from "@mui/material";
-import { Product } from "../../ProductOverview";
+import { Product } from "../ProductOverview/ProductOverview";
 import style from "./SimpleProduct.module.css";
 
 const SimpleProduct = ({

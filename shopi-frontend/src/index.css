@@ -16,3 +16,8 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import SimpleProduct from "./components/SimpleProduct/SimpleProduct";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
+import SimpleProduct from "../SimpleProduct/SimpleProduct";
+import ProductDetails from "../ProductDetails/ProductDetails";
+import style from "./ProductOverview.module.css";
 
 export type Product = {
     id: number;
@@ -27,16 +28,15 @@ const ProductOverview = () => {
     }, []);
 
     return (
-        <>
-            <div>
-                <h1>Product Overview</h1>
+        <div>
+            <div className={style.container}>
                 {products &&
                     products.map((product) => (
                         <SimpleProduct product={product} key={product.id} setSelectedProduct={setSelectedProduct} />
                     ))}
             </div>
             {selectedProduct && <ProductDetails simpleProduct={selectedProduct} />}
-        </>
+        </div>
     );
 };
 
