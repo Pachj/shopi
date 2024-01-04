@@ -3,11 +3,13 @@ package ch.bbw.shopibackend.controller
 import ch.bbw.shopibackend.Product
 import ch.bbw.shopibackend.service.ProductService
 import ch.bbw.shopibackend.SimpleProduct
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"])
 class ProductController(
     private val productService: ProductService,
 ) {
