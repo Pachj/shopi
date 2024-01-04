@@ -2,10 +2,10 @@ package ch.bbw.shopibackend.repository
 
 import ch.bbw.shopibackend.Product
 import ch.bbw.shopibackend.SimpleProduct
-import ch.bbw.shopibackend.generated.jooq.public_.tables.Product.PRODUCT
-import ch.bbw.shopibackend.generated.jooq.public_.tables.Specification.SPECIFICATION
 import org.jooq.DSLContext
 import org.jooq.Record
+import org.jooq.generated.public_.tables.Product.PRODUCT
+import org.jooq.generated.public_.tables.Specification.SPECIFICATION
 import org.jooq.impl.DSL
 import org.springframework.stereotype.Repository
 
