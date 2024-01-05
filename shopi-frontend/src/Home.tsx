@@ -5,6 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import Login from "./components/Login/Login";
+import TokenInfo from "./components/TokenInfo";
 
 const Home = () => {
     const [openShoppingCart, setOpenShoppingCart] = useState(false);
@@ -21,6 +22,7 @@ const Home = () => {
                     <LoginIcon color={"primary"} fontSize={"inherit"} />
                 </IconButton>
             </div>
+            <TokenInfo />
             <ProductOverview />
             <ShoppingCart open={openShoppingCart} setOpen={setOpenShoppingCart} />
             <Login open={showLoginMask} setOpen={setShowLoginMask} />
