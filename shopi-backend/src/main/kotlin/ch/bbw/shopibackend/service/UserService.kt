@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val tokenService: TokenService
 ) {
 
     fun createUser(user: ShopiUser): ShopiUser {
@@ -21,4 +22,11 @@ class UserService(
         return userRepository.findByEmail(email)
     }
 
+    fun getUserIdFromToken(bearerToken: String): Int? {
+        val userEmail = tokenService.extractEmail(bearerToken.substringAfter("Bearer "))
+        if (userEmail != null) {
+            return findByEmail(userEmail).id
+        }
+        return null
+    }
 }

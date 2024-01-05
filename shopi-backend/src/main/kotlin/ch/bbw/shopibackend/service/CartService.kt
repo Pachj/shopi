@@ -16,16 +16,11 @@ class CartService(
     }
 
     fun addItemToCart(product: SimpleProduct, bearerToken: String) {
-        val userEmail = tokenService.extractEmail(bearerToken.substringAfter("Bearer "))
-        if (userEmail != null) {
-            val userId = userService.findByEmail(userEmail).id
-            if (userId != null) {
-                cartRepository.add(product.id, userId)
-            }
-        }
+        val userId = userService.getUserIdFromToken(bearerToken) ?: throw Exception("User not valid")
+        cartRepository.add(product.id, userId)
     }
 
-    fun getCart(userId: Int){
+    fun getCart(userId: Int) {
         cartRepository.getCart(userId)
     }
 
