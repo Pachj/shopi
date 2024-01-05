@@ -12,7 +12,13 @@ class CartRepository(
     private val context: DSLContext
 ) {
 
-    fun delete() {
+    fun deleteProductFromCart(productId: Int, userId: Int): Cart? {
+        context.deleteFrom(CART_PRODUCT)
+            .where(CART_PRODUCT.CART_FK.eq(userId))
+            .and(CART_PRODUCT.PRODUCT_FK.eq(productId))
+            .execute()
+
+        return getCart(userId)
     }
 
     fun add(productId: Int, userId: Int) {
@@ -59,7 +65,7 @@ class CartRepository(
             .fetch()
 
         if (cartItems.isEmpty()) {
-            return null
+            return Cart(emptyList())
         }
 
         return Cart(cartItems.map {
@@ -75,5 +81,15 @@ class CartRepository(
                 amount = it.get("amount", Int::class.java),
             )
         })
+    }
+
+    fun changeAmount(productId: Int, userId: Int, amount: Int): Cart? {
+            context.update(CART_PRODUCT)
+                .set(CART_PRODUCT.COUNT, amount)
+                .where(CART_PRODUCT.CART_FK.eq(userId))
+                .and(CART_PRODUCT.PRODUCT_FK.eq(productId))
+                .execute()
+
+        return getCart(userId)
     }
 }

@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS cart
 
 CREATE TABLE IF NOT EXISTS cart_product
 (
-    count      SMALLINT NOT NULL,
+    count      INT NOT NULL,
     cart_fk    INT NOT NULL,
     CONSTRAINT cart_fk
         FOREIGN KEY (cart_fk) REFERENCES cart (id),

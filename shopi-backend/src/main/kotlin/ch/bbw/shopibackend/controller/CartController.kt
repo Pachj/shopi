@@ -2,6 +2,7 @@ package ch.bbw.shopibackend.controller
 
 import ch.bbw.shopibackend.SimpleProduct
 import ch.bbw.shopibackend.model.Cart
+import ch.bbw.shopibackend.model.CartItem
 import ch.bbw.shopibackend.service.CartService
 import org.springframework.web.bind.annotation.*
 
@@ -21,8 +22,8 @@ class CartController(
         cartService.addItemToCart(product, bearerToken)
     }
 
-    @DeleteMapping
-    fun deleteProduct() {
-
+    @PutMapping
+    fun changeAmount(@RequestHeader("Authorization") bearerToken: String, @RequestBody cartItem: CartItem): Cart? {
+        return cartService.changeAmount(cartItem.product, bearerToken, cartItem.amount)
     }
 }
