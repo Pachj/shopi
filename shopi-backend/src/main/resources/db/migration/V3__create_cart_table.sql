@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS shopiUser
 CREATE TABLE IF NOT EXISTS cart
 (
     id      SERIAL PRIMARY KEY,
-    count   VARCHAR(250),
     user_fk INT NOT NULL,
     CONSTRAINT user_fk
         FOREIGN KEY (user_fk) REFERENCES shopiUser (id)
@@ -16,7 +15,7 @@ CREATE TABLE IF NOT EXISTS cart
 
 CREATE TABLE IF NOT EXISTS cart_product
 (
-    count      VARCHAR(250),
+    count      SMALLINT NOT NULL,
     cart_fk    INT NOT NULL,
     CONSTRAINT cart_fk
         FOREIGN KEY (cart_fk) REFERENCES cart (id),

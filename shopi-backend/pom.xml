@@ -137,6 +137,7 @@
                     <url>jdbc:postgresql://localhost:8081/shopi</url>
                     <user>myuser</user>
                     <password>shopi123</password>
+                    <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>
 
