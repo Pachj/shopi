@@ -28,6 +28,7 @@ class CustomSecurityConfiguration(
                         "/error",
                         "/products",
                         "/login",
+                        "/user"
                     ).permitAll()
                     .anyRequest().fullyAuthenticated()
             }
