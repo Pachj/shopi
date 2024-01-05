@@ -17,4 +17,8 @@ class UserService(
         return userRepository.findById(id)
     }
 
+    fun findByEmail(email: String): ShopiUser {
+        return userRepository.findByEmail(email)
+    }
+
 }
