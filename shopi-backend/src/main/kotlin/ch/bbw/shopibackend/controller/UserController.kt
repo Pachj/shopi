@@ -1,6 +1,4 @@
 package ch.bbw.shopibackend.controller
-
-import ch.bbw.shopibackend.Role
 import ch.bbw.shopibackend.ShopiUser
 import ch.bbw.shopibackend.service.UserService
 import org.springframework.web.bind.annotation.*
@@ -29,7 +27,6 @@ class UserController(
         ShopiUser(
             email = this.email,
             password = this.password,
-            role = Role.USER,
         )
 
     private fun ShopiUser.toResponse(): UserResponse =

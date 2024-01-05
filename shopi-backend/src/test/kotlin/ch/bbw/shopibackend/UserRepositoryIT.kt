@@ -17,7 +17,6 @@ class UserRepositoryIT {
         val newUser = ShopiUser(
             email = "test@mail.com",
             password = "mytestpassword",
-            role = Role.USER
         )
 
         val createdUser = userRepository.create(newUser)
