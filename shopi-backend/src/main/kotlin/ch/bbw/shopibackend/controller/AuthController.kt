@@ -3,13 +3,11 @@ package ch.bbw.shopibackend.controller
 import ch.bbw.shopibackend.AuthenticationResponse
 import ch.bbw.shopibackend.AuthenticationRequest
 import ch.bbw.shopibackend.service.AuthenticationService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/login")
+@CrossOrigin(origins = ["http://localhost:3000"])
 class AuthController(
     private val authenticationService: AuthenticationService
 ) {

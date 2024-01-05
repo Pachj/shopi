@@ -3,9 +3,12 @@ import ProductOverview from "./components/ProductOverview/ProductOverview";
 import { IconButton, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+import LoginIcon from "@mui/icons-material/Login";
+import Login from "./components/Login/Login";
 
 const Home = () => {
     const [openShoppingCart, setOpenShoppingCart] = useState(false);
+    const [showLoginMask, setShowLoginMask] = useState(false);
 
     return (
         <div>
@@ -14,9 +17,13 @@ const Home = () => {
                 <IconButton size={"large"} onClick={() => setOpenShoppingCart(!openShoppingCart)}>
                     <ShoppingCartIcon color={"primary"} fontSize={"inherit"} />
                 </IconButton>
+                <IconButton size={"large"} onClick={() => setShowLoginMask(true)}>
+                    <LoginIcon color={"primary"} fontSize={"inherit"} />
+                </IconButton>
             </div>
             <ProductOverview />
             <ShoppingCart open={openShoppingCart} setOpen={setOpenShoppingCart} />
+            <Login open={showLoginMask} setOpen={setShowLoginMask} />
         </div>
     );
 };
