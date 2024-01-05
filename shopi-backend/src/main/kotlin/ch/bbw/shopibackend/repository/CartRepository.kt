@@ -1,8 +1,10 @@
 package ch.bbw.shopibackend.repository
 
+import ch.bbw.shopibackend.SimpleProduct
+import ch.bbw.shopibackend.model.Cart
+import ch.bbw.shopibackend.model.CartItem
 import org.jooq.DSLContext
-import org.jooq.generated.public_.Tables.CART
-import org.jooq.generated.public_.Tables.CART_PRODUCT
+import org.jooq.generated.public_.Tables.*
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -40,6 +42,38 @@ class CartRepository(
         }
     }
 
-    fun getCart(userId: Int) {
+    fun getCart(userId: Int): Cart? {
+        val cartItems = context.select(
+            PRODUCT.ID.`as`("id"),
+            PRODUCT.NAME.`as`("name"),
+            PRODUCT.DESCRIPTION.`as`("description"),
+            PRODUCT.PRICE.`as`("price"),
+            PRODUCT.STOCK.`as`("stock"),
+            PRODUCT.IMAGE.`as`("imageLink"),
+            CART_PRODUCT.COUNT.`as`("amount"),
+        )
+            .from(CART)
+            .leftJoin(CART_PRODUCT).on(CART_PRODUCT.CART_FK.eq(CART.ID))
+            .leftJoin(PRODUCT).on(PRODUCT.ID.eq(CART_PRODUCT.PRODUCT_FK))
+            .where(CART.USER_FK.eq(userId))
+            .fetch()
+
+        if (cartItems.isEmpty()) {
+            return null
+        }
+
+        return Cart(cartItems.map {
+            CartItem(
+                product = SimpleProduct(
+                    id = it.get("id", Int::class.java),
+                    name = it.get("name", String::class.java),
+                    description = it.get("description", String::class.java),
+                    price = it.get("price", String::class.java),
+                    stock = it.get("stock", Int::class.java),
+                    imageLink = it.get("imageLink", String::class.java),
+                ),
+                amount = it.get("amount", Int::class.java),
+            )
+        })
     }
 }

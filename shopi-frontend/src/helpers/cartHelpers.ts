@@ -10,7 +10,17 @@ export const addToCart = async (product: Product) => {
         },
         body: JSON.stringify(product),
     });
+};
 
+export const getCart = async () => {
+    const response = await fetch("http://localhost:8080/cart", {
+        method: "GET",
+        headers: {
+            "Access-control-allow-origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+    });
     const data = await response.json();
-    console.log(data);
+    return data;
 };

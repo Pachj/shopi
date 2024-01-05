@@ -1,13 +1,13 @@
 package ch.bbw.shopibackend.service
 
 import ch.bbw.shopibackend.SimpleProduct
+import ch.bbw.shopibackend.model.Cart
 import ch.bbw.shopibackend.repository.CartRepository
 import org.springframework.stereotype.Service
 
 @Service
 class CartService(
     private val cartRepository: CartRepository,
-    private val tokenService: TokenService,
     private val userService: UserService,
 ) {
 
@@ -20,8 +20,9 @@ class CartService(
         cartRepository.add(product.id, userId)
     }
 
-    fun getCart(userId: Int) {
-        cartRepository.getCart(userId)
+    fun getCart(bearerToken: String): Cart? {
+        val userId = userService.getUserIdFromToken(bearerToken) ?: throw Exception("User not valid")
+        return cartRepository.getCart(userId)
     }
 
 }

@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent } from "@mui/material";
 import { Product } from "../ProductOverview/ProductOverview";
 import style from "./SimpleProduct.module.css";
+import { addToCart } from "../../helpers/cartHelpers";
 
 const SimpleProduct = ({
     product,
@@ -18,7 +19,7 @@ const SimpleProduct = ({
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "center" }}>
                 <Button onClick={() => setSelectedProduct(product)}>Details</Button>
-                <Button>Warenkorb</Button>
+                <Button onClick={() => addToCart(product)}>Warenkorb</Button>
             </CardActions>
         </Card>
     );

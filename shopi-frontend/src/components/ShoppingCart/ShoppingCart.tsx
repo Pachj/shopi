@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Modal, Table, TableBody, TableContainer, Typography } from "@mui/material";
+import { getCart } from "../../helpers/cartHelpers";
 
 const boxStyle = {
     position: "absolute",
@@ -13,6 +14,12 @@ const boxStyle = {
 };
 
 const ShoppingCart = ({ open, setOpen }: { open: boolean; setOpen: (b: boolean) => void }) => {
+    const [shoppingCart, setShoppingCart] = useState(null);
+
+    useEffect(() => {
+        getCart().then((cart) => setShoppingCart(cart));
+    }, [open]);
+
     return (
         <Modal open={open} onClose={() => setOpen(false)}>
             <Box sx={boxStyle}>
