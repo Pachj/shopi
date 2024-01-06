@@ -64,7 +64,7 @@ class CartRepository(
             .where(CART.USER_FK.eq(userId))
             .fetch()
 
-        if (cartItems.isEmpty()) {
+        if (cartItems.size == 1 && cartItems.getValues("id").contains(null)) {
             return Cart(emptyList())
         }
 
