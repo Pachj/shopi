@@ -27,7 +27,6 @@ type ProductWithDetails = {
 
 const ProductDetails = ({ simpleProduct }: { simpleProduct: Product }) => {
     const [productWithDetails, setProductWithDetails] = useState<ProductWithDetails | null>(null);
-    console.log("productDetails", productWithDetails);
 
     const fetchProductDetails = async () => {
         const response = await fetch(`http://localhost:8080/products/${simpleProduct.id}`);
@@ -44,7 +43,7 @@ const ProductDetails = ({ simpleProduct }: { simpleProduct: Product }) => {
     return (
         <Modal open={simpleProduct !== null}>
             <Box sx={boxStyle}>
-                {productWithDetails ? (
+                {productWithDetails?.simpleProduct ? (
                     <>
                         <Typography variant={"h4"}>{productWithDetails.simpleProduct.name}</Typography>
                         <img

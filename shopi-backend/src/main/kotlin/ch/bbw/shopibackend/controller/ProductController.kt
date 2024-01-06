@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@CrossOrigin(origins = ["http://localhost:3000"])
 class ProductController(
     private val productService: ProductService,
 ) {
@@ -23,5 +22,4 @@ class ProductController(
     fun productDetails(@PathVariable id: Int): Product? {
         return productService.fetchProduct(id)
     }
-
 }

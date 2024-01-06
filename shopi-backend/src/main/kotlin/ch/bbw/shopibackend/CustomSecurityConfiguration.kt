@@ -36,6 +36,7 @@ class CustomSecurityConfiguration(
                         "/auth/refresh",
                         "/error",
                         "/products",
+                        "/products/**",
                         "/login",
                         "/user"
                     ).permitAll()
