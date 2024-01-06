@@ -1,19 +1,10 @@
-import { Box, CircularProgress, Modal, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Modal, Paper, Typography } from "@mui/material";
 import style from "../SimpleProduct/SimpleProduct.module.css";
 import React, { useEffect, useState } from "react";
 import { Product } from "../ProductOverview/ProductOverview";
 import ProductSpecifications from "./ProductSpecifications";
-
-const boxStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-};
+import { boxStyle } from "../../helpers/muiStyles";
+import CloseIcon from "@mui/icons-material/Close";
 
 export type Specification = {
     first: string;
@@ -25,7 +16,13 @@ type ProductWithDetails = {
     specification: Specification[];
 };
 
-const ProductDetails = ({ simpleProduct }: { simpleProduct: Product }) => {
+const ProductDetails = ({
+    simpleProduct,
+    setSelectedProduct,
+}: {
+    simpleProduct: Product;
+    setSelectedProduct: (b: null) => void;
+}) => {
     const [productWithDetails, setProductWithDetails] = useState<ProductWithDetails | null>(null);
 
     const fetchProductDetails = async () => {
@@ -41,8 +38,13 @@ const ProductDetails = ({ simpleProduct }: { simpleProduct: Product }) => {
     });
 
     return (
-        <Modal open={simpleProduct !== null}>
+        <Modal open={simpleProduct !== null} onClose={() => setSelectedProduct(null)}>
             <Box sx={boxStyle}>
+                <div className={"flexEnd"} style={{ width: "100%" }}>
+                    <IconButton onClick={() => setSelectedProduct(null)}>
+                        <CloseIcon />
+                    </IconButton>
+                </div>
                 {productWithDetails?.simpleProduct ? (
                     <>
                         <Typography variant={"h4"}>{productWithDetails.simpleProduct.name}</Typography>
@@ -52,7 +54,14 @@ const ProductDetails = ({ simpleProduct }: { simpleProduct: Product }) => {
                             alt={productWithDetails.simpleProduct.name}
                         />
                         <Typography variant={"body1"}>{productWithDetails.simpleProduct.description}</Typography>
-                        <Typography variant={"h5"}>{productWithDetails.simpleProduct.price}</Typography>
+                        <div className={"flexSpaceBetween"}>
+                            <Paper sx={{ padding: "1rem" }}>
+                                <Typography variant={"h5"}>{productWithDetails.simpleProduct.price}</Typography>
+                            </Paper>
+                            <Paper sx={{ padding: "1rem" }}>
+                                <Typography variant={"h5"}>{productWithDetails.simpleProduct.stock} Stück</Typography>
+                            </Paper>
+                        </div>
                         <ProductSpecifications specification={productWithDetails.specification} />
                     </>
                 ) : (

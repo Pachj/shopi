@@ -8,6 +8,7 @@ export type Product = {
     name: string;
     description: string;
     price: number;
+    stock: number;
     imageLink: string;
 };
 
@@ -35,7 +36,9 @@ const ProductOverview = () => {
                         <SimpleProduct product={product} key={product.id} setSelectedProduct={setSelectedProduct} />
                     ))}
             </div>
-            {selectedProduct && <ProductDetails simpleProduct={selectedProduct} />}
+            {selectedProduct && (
+                <ProductDetails simpleProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />
+            )}
         </div>
     );
 };

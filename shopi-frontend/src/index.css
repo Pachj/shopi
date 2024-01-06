@@ -21,3 +21,9 @@ code {
   display: flex;
   justify-content: flex-end;
 }
+
+.flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

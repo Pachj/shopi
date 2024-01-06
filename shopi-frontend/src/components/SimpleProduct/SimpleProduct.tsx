@@ -1,7 +1,9 @@
-import { Button, Card, CardActions, CardContent } from "@mui/material";
+import { Button, Card, CardActions, CardContent, IconButton, Typography } from "@mui/material";
 import { Product } from "../ProductOverview/ProductOverview";
 import style from "./SimpleProduct.module.css";
 import { addToCart } from "../../helpers/cartHelpers";
+import React from "react";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const SimpleProduct = ({
     product,
@@ -13,13 +15,23 @@ const SimpleProduct = ({
     return (
         <Card raised={true} sx={{ maxWidth: 300 }}>
             <CardContent>
-                <h2>{product.name}</h2>
-                <img className={style.productImage} src={product.imageLink} alt={product.name} />
-                <p>{product.price}</p>
+                <Typography className={style.marginBottom} variant={"h5"}>
+                    {product.name}
+                </Typography>
+                <img
+                    className={`${style.productImage} ${style.marginBottom}`}
+                    src={product.imageLink}
+                    alt={product.name}
+                />
+                <div className={"center"}>
+                    <Typography variant={"h6"}>{product.price}</Typography>
+                </div>
             </CardContent>
-            <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+            <CardActions className={"center"}>
                 <Button onClick={() => setSelectedProduct(product)}>Details</Button>
-                <Button onClick={() => addToCart(product)}>Warenkorb</Button>
+                <IconButton onClick={() => addToCart(product)} color="primary" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon />
+                </IconButton>
             </CardActions>
         </Card>
     );
