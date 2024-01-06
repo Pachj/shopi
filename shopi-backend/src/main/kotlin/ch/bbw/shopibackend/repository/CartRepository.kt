@@ -29,13 +29,25 @@ class CartRepository(
             .fetchOneInto(Int::class.java)
 
         if (cartId != null) {
-            // increase amount on cart_product by 1
-            context.update(CART_PRODUCT)
-                .set(CART_PRODUCT.COUNT, CART_PRODUCT.COUNT.plus(1))
+            // check if product is already in cart
+            val cartProductId = context.select(CART_PRODUCT.CART_FK, CART_PRODUCT.PRODUCT_FK)
+                .from(CART_PRODUCT)
                 .where(CART_PRODUCT.CART_FK.eq(cartId))
                 .and(CART_PRODUCT.PRODUCT_FK.eq(productId))
-                .execute()
+                .fetchOneInto(Int::class.java)
 
+            if (cartProductId == null) {
+                context.insertInto(CART_PRODUCT, CART_PRODUCT.COUNT, CART_PRODUCT.CART_FK, CART_PRODUCT.PRODUCT_FK)
+                    .values(1, cartId, productId)
+                    .execute()
+            } else {
+                // increase amount on cart_product by 1
+                context.update(CART_PRODUCT)
+                    .set(CART_PRODUCT.COUNT, CART_PRODUCT.COUNT.plus(1))
+                    .where(CART_PRODUCT.CART_FK.eq(cartId))
+                    .and(CART_PRODUCT.PRODUCT_FK.eq(productId))
+                    .execute()
+            }
         } else {
             cartId = context.insertInto(CART, CART.USER_FK)
                 .values(userId)

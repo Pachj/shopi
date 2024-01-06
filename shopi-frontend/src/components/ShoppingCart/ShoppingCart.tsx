@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Box, CircularProgress, Modal, Table, TableBody, TableContainer, TextField, Typography } from "@mui/material";
+import {
+    Box,
+    CircularProgress,
+    IconButton,
+    Modal,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    TextField,
+    Typography,
+} from "@mui/material";
 import { getCart, updateCart } from "../../helpers/cartHelpers";
 import { Product } from "../ProductOverview/ProductOverview";
+import CloseIcon from "@mui/icons-material/Close";
 
 const boxStyle = {
     position: "absolute",
@@ -55,6 +68,11 @@ const ShoppingCart = ({ open, setOpen }: { open: boolean; setOpen: (b: boolean) 
             }}
         >
             <Box sx={boxStyle}>
+                <div className={"flexEnd"} style={{ width: "100%" }}>
+                    <IconButton onClick={() => setOpen(false)}>
+                        <CloseIcon />
+                    </IconButton>
+                </div>
                 <Typography variant={"h4"}>Warenkorb</Typography>
                 {!shoppingCartIsLoaded && <CircularProgress />}
                 {shoppingCartIsLoaded && shoppingCart && shoppingCart.items.length === 0 && (
@@ -65,17 +83,17 @@ const ShoppingCart = ({ open, setOpen }: { open: boolean; setOpen: (b: boolean) 
                         <Table>
                             <TableBody>
                                 {shoppingCart.items.map((item) => (
-                                    <tr key={item.product.id}>
-                                        <td>
+                                    <TableRow key={item.product.id}>
+                                        <TableCell>
                                             <TextField
                                                 type={"number"}
                                                 value={item.amount}
                                                 onChange={(e) => updateAmount(item.product, parseInt(e.target.value))}
                                             />
-                                        </td>
-                                        <td>{item.product.name}</td>
-                                        <td>{item.amount * item.product.price}</td>
-                                    </tr>
+                                        </TableCell>
+                                        <TableCell>{item.product.name}</TableCell>
+                                        <TableCell>{item.amount * item.product.price}</TableCell>
+                                    </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
